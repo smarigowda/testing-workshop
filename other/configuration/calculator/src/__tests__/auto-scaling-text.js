@@ -5,4 +5,5 @@ import AutoScalingText from '../auto-scaling-text'
 test('mounts', () => {
   const div = document.createElement('div')
   ReactDOM.render(<AutoScalingText />, div)
+  console.log(div.innerHTML)
 })
