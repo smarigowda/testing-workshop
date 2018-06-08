@@ -1,14 +1,15 @@
-module.exports = wallaby1 => {
+module.exports = wallaby => {
+  process.env.NODE_ENV = 'test';
   return {
     files: [
       'jest.config.js',
       'src/**/*.+(js|jsx|json|snap|css|less|sass|scss|jpg|jpeg|gif|png|svg)',
       'config/**/*.js',
-      '!src/**/*.test.js?(x)',
-      '*/**/__test__/*.js?(x)'
+      'test/*.js',
+      '!src/**/__tests__/*.js?(x)'
     ],
 
-    tests: ['src/**/__test__/*.js?(x)'],
+    tests: ['src/**/__tests__/*.js?(x)'],
 
     env: {
       type: 'node',
@@ -16,18 +17,7 @@ module.exports = wallaby1 => {
     },
 
     compilers: {
-      '**/*.js?(x)': wallaby1.compilers.babel({})
-    },
-
-    workers: {
-      recycle: true,
-    },
-
-    setup: wallaby => {
-      const jestConfig = require('./jest.config');
-      delete jestConfig.transform['^.+\\.(js|jsx)$'];
-      delete jestConfig.testEnvironment;
-      wallaby.testFramework.configure(jestConfig);
+      '**/*.js?(x)': wallaby.compilers.babel()
     },
 
     hints: {
