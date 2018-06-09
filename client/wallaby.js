@@ -11,7 +11,8 @@ module.exports = wallaby => {
 
     // /Users/santosh/SAN/github/testing-workshop/client/src/screens/__tests__/editor.todo.js
     // tests: ['src/**/__tests__/*.js?(x)'],
-    tests: ['src/screens/__tests__/*.todo.js'],
+    tests: [ 'src/screens/__tests__/*.todo.js',
+             'src/components/__tests__/login.step-1.todo.js' ],
 
     env: {
       type: 'node',
