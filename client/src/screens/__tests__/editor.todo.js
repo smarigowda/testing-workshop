@@ -26,6 +26,7 @@ test('calls onSubmit with the username and password when submitted', async () =>
   const fakeHistory = {
     push: jest.fn(),
   }
+  const preDate = new Date().getTime()
   // use ReactDOM.render() to render the editor to a div
   //
   ReactDOM.render(<Editor user={fakeUser} history={fakeHistory} />, container)
@@ -51,6 +52,7 @@ test('calls onSubmit with the username and password when submitted', async () =>
   await flushPromises()
   //// Assert
   // ensure the create function was called with the right data
+  const postDate = new Date().getTime() //?
   expect(fakeHistory.push).toHaveBeenCalled()
   expect(fakeHistory.push).toHaveBeenCalledTimes(1)
   expect(fakeHistory.push).toHaveBeenCalledWith('/')
@@ -62,6 +64,9 @@ test('calls onSubmit with the username and password when submitted', async () =>
     tags: ['js', 'wallaby', 'unit-test'],
     title: title.value,
   })
+  const date = new Date(mockUtils.posts.create.mock.calls[0][0].date).getTime()
+  expect(date).toBeGreaterThan(preDate)
+  expect(date).toBeLessThan(postDate)
 })
 
 // TODO later...
