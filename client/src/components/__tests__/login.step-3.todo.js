@@ -1,7 +1,7 @@
 // dealing with react's simulated events
 import React from 'react'
 import {generate} from 'til-client-test-utils'
-import {renderIntoDocument, cleanup} from 'react-testing-library'
+import {renderIntoDocument, cleanup, fireEvent} from 'react-testing-library'
 import Login from '../login'
 
 // Due to the fact that our element is not in the document, the
@@ -45,7 +45,8 @@ test('calls onSubmit with the username and password when submitted', () => {
   // Act
   usernameNode.value = fakeUser.username
   passwordNode.value = fakeUser.password
-  submitButtonNode.click()
+  fireEvent.click(submitButtonNode)
+  // submitButtonNode.click()
   // Simulate.submit(formNode)
 
   // Assert
@@ -63,8 +64,8 @@ test('calls onSubmit with the username and password when submitted', () => {
 /*
 http://ws.kcd.im/?ws=Testing&e=login.step-3%20(renderIntoDocument)&em=santosharakere@gmail.com
 */
-test.skip('I submitted my elaboration and feedback', () => {
-  const submitted = false // change this when you've submitted!
+test('I submitted my elaboration and feedback', () => {
+  const submitted = true // change this when you've submitted!
   expect(submitted).toBe(true)
 })
 ////////////////////////////////
