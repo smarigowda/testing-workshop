@@ -1,7 +1,7 @@
 // dealing with react's simulated events
 import React from 'react'
 import {generate} from 'til-client-test-utils'
-import {render} from 'react-testing-library'
+import {renderIntoDocument, cleanup} from 'react-testing-library'
 import Login from '../login'
 
 // Due to the fact that our element is not in the document, the
@@ -22,15 +22,20 @@ import Login from '../login'
 // Extra bonus, rather than manually inserting the container into the document
 // check out the docs for react-testing-library and the renderIntoDocument method!
 
+afterEach(() => {
+  cleanup()
+  document.body.innerHTML //?
+})
+
 test('calls onSubmit with the username and password when submitted', () => {
   // Arrange
   const fakeUser = generate.loginForm()
   const handleSubmit = jest.fn()
-  const {container, getByLabelText, getByText} = render(
+  const {getByLabelText, getByText} = renderIntoDocument(
     <Login onSubmit={handleSubmit} />,
   )
 
-  document.body.appendChild(container)
+  // document.body.appendChild(container)
 
   const usernameNode = getByLabelText('username')
   const passwordNode = getByLabelText('password')
@@ -40,13 +45,13 @@ test('calls onSubmit with the username and password when submitted', () => {
   // Act
   usernameNode.value = fakeUser.username
   passwordNode.value = fakeUser.password
-  getByText('submit').click()
+  submitButtonNode.click()
   // Simulate.submit(formNode)
 
   // Assert
   expect(handleSubmit).toHaveBeenCalledTimes(1)
   expect(handleSubmit).toHaveBeenCalledWith(fakeUser)
-  expect(submitButtonNode.type).toBe('submit')
+  document.body.innerHTML //?
 })
 
 //////// Elaboration & Feedback /////////
