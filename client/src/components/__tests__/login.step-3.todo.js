@@ -1,7 +1,7 @@
 // dealing with react's simulated events
 import React from 'react'
 import {generate} from 'til-client-test-utils'
-import {render, Simulate} from 'react-testing-library'
+import {render} from 'react-testing-library'
 import Login from '../login'
 
 // Due to the fact that our element is not in the document, the
@@ -30,15 +30,18 @@ test('calls onSubmit with the username and password when submitted', () => {
     <Login onSubmit={handleSubmit} />,
   )
 
+  document.body.appendChild(container)
+
   const usernameNode = getByLabelText('username')
   const passwordNode = getByLabelText('password')
-  const formNode = container.querySelector('form')
+  // const formNode = container.querySelector('form')
   const submitButtonNode = getByText('submit')
 
   // Act
   usernameNode.value = fakeUser.username
   passwordNode.value = fakeUser.password
-  Simulate.submit(formNode)
+  getByText('submit').click()
+  // Simulate.submit(formNode)
 
   // Assert
   expect(handleSubmit).toHaveBeenCalledTimes(1)
