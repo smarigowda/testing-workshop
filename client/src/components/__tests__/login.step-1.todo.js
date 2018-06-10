@@ -33,7 +33,7 @@ test('calls onSubmit with the username and password when submitted', () => {
 // 3. Change submitted from `false` to `true`
 // 4. And you're all done!
 /*
-http://ws.kcd.im/?ws=Testing&e=login.step-1&em=
+http://ws.kcd.im/?ws=Testing&e=login.step-1&em=santosharakere@gmail.com
 */
 test('I submitted my elaboration and feedback', () => {
   const submitted = true // change this when you've submitted!
