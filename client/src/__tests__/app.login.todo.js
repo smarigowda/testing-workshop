@@ -96,8 +96,8 @@ test('login as an existing user', async () => {
 /*
 http://ws.kcd.im/?ws=Testing&e=app.login&em=santosharakere@gmail.com
 */
-test.skip('I submitted my elaboration and feedback', () => {
-  const submitted = false // change this when you've submitted!
+test('I submitted my elaboration and feedback', () => {
+  const submitted = true // change this when you've submitted!
   expect(submitted).toBe(true)
 })
 ////////////////////////////////
